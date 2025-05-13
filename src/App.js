@@ -1,23 +1,12 @@
-import logo from './images/logo.svg';
 import './CSS/App.css';
+import buildings from './data.js';
+import Table from './components/Table.js';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <h3>Самые высокие здания и сооружения</h3>
+       <Table data={ buildings } amountRows="15" /> {/*здесь можно отключить пагинацию showPagination={false} и поменять количество строк для вывода*/}
     </div>
   );
 }

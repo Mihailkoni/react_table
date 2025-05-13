@@ -1,38 +1,110 @@
+:root {
+  --main-font-family-title:"Roboto";
+  --main-font-family-text: "Montserrat";
+  --main-font-size-text:18px;
+  --main-text-color:#262626;
+  --main-background-color-th-disabled: #eae1ff;
+  --main-background-color-th-enabled:#b287fd;
+  --main-border-th: 1px solid black;
+  --main-border-td: 1px solid black;
+  --main-border-numPages:1px solid #b287fd;
+  --main-table-border-spacing: 15px;
+  --main-border-radius-th:12px;
+  --main-border-radius-td:12px;
+}
+
 .App {
+  font-family: var(--main-font-family);
+  margin: 0;
+  padding: 0;
+}
+
+/*заголовок*/
+.App h3 {
+  font-family: var(--main-font-family-title);
   text-align: center;
+  font-size: larger;
+  margin: 15px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App table {
+  margin-top: 5px;
+  margin: 0 auto;
+  border-spacing: var(--main-table-border-spacing);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/*заголовок таблицы*/
+.App th {
+  padding: 12px 15px;
+  text-align: left;
+  border: var(--main-border-th);
+  background-color: var(--main-background-color-th-disabled);
+  color: var(--main-text-color);
+  text-align: center;
+  border-radius: var(--main-border-radius-th);
+  transition: 0.5s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/*ячейки таблицы*/
+.App td {
+  padding: 12px 15px;
+  text-align: left;
+  border:var(--main-border-td);
+  color: var(--main-text-color);
+  border-radius: var(--main-border-radius-td);
+  transition: 0.3s;
+}
+
+/*анимация при наведении на заголовок таблицы*/
+.App th:hover {
+  transform:scale(1.05);
+  background-color:var(--main-background-color-th-enabled);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/*анимация при наведении на ячейки таблицы*/
+.App td:hover {
+  transform:scale(1.02);
+  background-color:#b2f142;
+  color: var(--main-text-color);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/*убираем все другие ячейки на странице*/
+.App .hide {
+  visibility:collapse;
 }
+
+/* cтили для пагинации */
+/*start*/
+.App .numPages {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  text-align: center;
+  font-family: var(--main-font-family-text);
+}
+
+.App .numPages span {
+  display: inline-block;
+  margin: 5px 5px;
+  padding: 5px 10px;
+  border: var(--main-border-numPages);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.App .numPages span:hover {
+  transform:scale(1.15);
+  background-color: #b287fd;
+  color: white;
+}
+
+.App .numPages span.active {
+  background-color: #b287fd;
+  transform: scale(1.2);
+  color: white;
+  font-weight: bold;
+}
+/*end*/
