@@ -1,110 +1,273 @@
 :root {
-  --main-font-family-title:"Roboto";
-  --main-font-family-text: "Montserrat";
-  --main-font-size-text:18px;
-  --main-text-color:#262626;
-  --main-background-color-th-disabled: #eae1ff;
-  --main-background-color-th-enabled:#b287fd;
-  --main-border-th: 1px solid black;
-  --main-border-td: 1px solid black;
-  --main-border-numPages:1px solid #b287fd;
+  /*основные переменные*/
+  --main-font-family: "Montserrat";
+  --main-font-size: 18px;
+  --main-text-color: #262626;
+  --main-border-radius: 12px;
+  --main-transition: 0.3s;
+
+  /*цвета*/
+  --main-color-purple: #b287fd;
+  --main-color-purple-light: #eae1ff;
+  --main-color-lime-green: #b2f142;
+  --main-color-white: white;
+  --main-color-black: #262626;
+  --main-color-shadow-purple: rgba(106, 0, 255, 0.5);
+
+  /*переменные для таблицы*/
   --main-table-border-spacing: 15px;
-  --main-border-radius-th:12px;
-  --main-border-radius-td:12px;
+
+  /*заголовок таблицы*/
+  --main-th-background-disabled: var(--main-color-purple-light);
+  --main-th-border-disabled: 1px solid var(--main-color-purple);
+  --main-th-text-disabled: var(--main-color-black);
+  --main-th-background-enabled: var(--main-color-purple);
+  --main-th-border-enabled: 1px solid var(--main-color-purple);
+  --main-th-text-enabled: var(--main-color-white);
+  --main-th-transform: scale(1.05);
+  --main-th-shadow: 0 0 5px var(--main-color-shadow-purple);
+
+  /*ячейки таблицы*/
+  --main-td-background-disabled: transparent;
+  --main-td-border-disabled: 1px solid var(--main-color-black);
+  --main-td-text-disabled: var(--main-color-black);
+  --main-td-background-enabled: var(--main-color-lime-green);
+  --main-td-border-enabled: 1px solid var(--main-color-lime-green);
+  --main-td-text-enabled: var(--main-color-black);
+  --main-td-transform: scale(1.02);
+  --main-td-shadow: 0 0 5px var(--main-color-lime-green);
+
+  /*пагинация*/
+  --main-pagination-border: 1px solid var(--main-color-purple);
+  --main-pagination-active-bg: var(--main-color-purple);
+  --main-pagination-active-text: var(--main-color-white);
+  --main-pagination-hover-bg: var(--main-color-purple);
+  --main-pagination-hover-text: var(--main-color-white);
+  --main-pagitation-shadow: 0 0 5px var(--main-color-shadow-purple);
+
+  /*для форм*/
+  --main-fieldset-border: 1px solid var(--main-color-black);
+
+  --main-input-border: 1px solid var(--main-color-purple);
+  --main-input-shadow: 0 0 5px var(--main-color-shadow-purple);
+
+  --main-button-border: 1px solid var(--main-color-purple);
+  --main-button-shadow: 0 0 5px var(--main-color-shadow-purple);
 }
 
 .App {
-  font-family: var(--main-font-family);
   margin: 0;
   padding: 0;
+  font-family: var(--main-font-family);
+  color: var(--main-text-color);
 }
 
 /*заголовок*/
-.App h3 {
-  font-family: var(--main-font-family-title);
+.App .title {
   text-align: center;
-  font-size: larger;
+  font-size: x-large;
   margin: 15px;
+  font-family: var(--main-font-family);
+  color: var(--main-text-color);
 }
 
+/*таблица*/
+/*start*/
 .App table {
   margin-top: 5px;
   margin: 0 auto;
   border-spacing: var(--main-table-border-spacing);
+  font-family: var(--main-font-family);
 }
 
 /*заголовок таблицы*/
 .App th {
   padding: 12px 15px;
-  text-align: left;
-  border: var(--main-border-th);
-  background-color: var(--main-background-color-th-disabled);
-  color: var(--main-text-color);
   text-align: center;
-  border-radius: var(--main-border-radius-th);
-  transition: 0.5s;
+  border: var(--main-th-border-disabled);
+  background-color: var(--main-th-background-disabled);
+  color: var(--main-th-text-disabled);
+  border-radius: var(--main-border-radius);
+  transition: var(--main-transition);
 }
 
 /*ячейки таблицы*/
 .App td {
   padding: 12px 15px;
   text-align: left;
-  border:var(--main-border-td);
-  color: var(--main-text-color);
-  border-radius: var(--main-border-radius-td);
-  transition: 0.3s;
+  border: var(--main-td-border-disabled);
+  color: var(--main-td-text-disabled);
+  border-radius: var(--main-border-radius);
+  transition: var(--main-transition);
 }
 
 /*анимация при наведении на заголовок таблицы*/
 .App th:hover {
-  transform:scale(1.05);
-  background-color:var(--main-background-color-th-enabled);
-  color: white;
+  transform: var(--main-th-transform);
+  box-shadow: var(--main-th-shadow);
+  background-color: var(--main-th-background-enabled);
+  color: var(--main-th-text-enabled);
+  border: var(--main-th-border-enabled);
 }
 
 /*анимация при наведении на ячейки таблицы*/
 .App td:hover {
-  transform:scale(1.02);
-  background-color:#b2f142;
-  color: var(--main-text-color);
+  border: var(--main-td-border-enabled);
+  transform: var(--main-td-transform);
+  box-shadow: var(--main-td-shadow);
+  background-color: var(--main-td-background-enabled);
+  color: var(--main-td-text-enabled);
 }
+/*end*/
 
-/*убираем все другие ячейки на странице*/
+/*убираем элементы которые не отображаются на данной странице*/
 .App .hide {
-  visibility:collapse;
+  visibility: collapse;
 }
 
-/* cтили для пагинации */
+/*стили для пагинации*/
 /*start*/
 .App .numPages {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  margin-right: 20px;
-  margin-left: 20px;
+  margin: 10px 20px 20px;
   text-align: center;
-  font-family: var(--main-font-family-text);
+  font-family: var(--main-font-family);
 }
 
 .App .numPages span {
   display: inline-block;
-  margin: 5px 5px;
+  margin: 5px;
   padding: 5px 10px;
-  border: var(--main-border-numPages);
   border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s;
+  border: var(--main-pagination-border);
+  transition: var(--main-transition);
 }
 
+/*анимация при наведении на номер страницы*/
 .App .numPages span:hover {
-  transform:scale(1.15);
-  background-color: #b287fd;
-  color: white;
+  transform: scale(1.15);
+  background-color: var(--main-pagination-hover-bg);
+  color: var(--main-pagination-hover-text);
 }
 
+/*стиль активной страницы*/
 .App .numPages span.active {
-  background-color: #b287fd;
   transform: scale(1.2);
-  color: white;
   font-weight: bold;
+  background-color: var(--main-pagination-active-bg);
+  box-shadow: var(--main-pagitation-shadow);
+  color: var(--main-pagination-active-text);
+}
+
+/*при нажатии на страницу*/
+.App .numPages span:active {
+  border: 1px solid lightgrey;
+  font-weight: bold;
+}
+/*end*/
+
+/*фильтрация*/
+/*start*/
+.App .filter {
+  width: fit-content;
+  text-align: center;
+  border-radius: 16px;
+  margin: 5px auto;
+  padding: 10px;
+  border: var(--main-fieldset-border);
+  font-family: var(--main-font-family);
+  transition: var(--main-transition);
+}
+
+/*анимация при наведении на блок фильтра*/
+.App .filter:hover {
+  transform: scale(1.05);
+  border: 1px solid var(--main-color-purple);
+}
+
+/*стили для легенды*/
+.App .filter legend {
+  text-align: center;
+  color: var(--main-text-color);
+  font-family: var(--main-font-family);
+  font-size: large;
+}
+
+/*стили для полей ввода*/
+.App .filter input {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 4px;
+  font-family: var(--main-font-family);
+  border: var(--main-input-border);
+  transition: var(--main-transition);
+}
+
+/*анимация для полей ввода когда они в фокусе*/
+.App .filter input:focus {
+  box-shadow: var(--main-input-shadow);
+  background-color: var(--main-color-white);
+  outline: none;
+}
+
+/*анимация для полей ввода при наведении*/
+.App .filter input:hover {
+  transform: scale(1.05);
+  color: var(--main-color-white);
+  background-color: var(--main-color-purple);
+}
+
+/*при наведении на поля ввода изменяем цвет текста placeholder'a*/
+.App .filter input:hover::placeholder {
+  color: var(--main-color-white);
+}
+
+/*убрал стрелочки*/
+.App .filter input[type="number"]::-webkit-inner-spin-button,
+.App .filter input[type="number"]::-webkit-outer-spin-button {
+  display: none;
+}
+
+/*стили для кнопок*/
+.App .filter button {
+  font-family: var(--main-font-family);
+  border-radius: var(--main-border-radius);
+  border: var(--main-button-border);
+  padding: 10px;
+  margin: 10px;
+  background-color: transparent;
+  transition: var(--main-transition);
+}
+
+/*анимация для кнопок при нажатии*/
+.App .filter button:active {
+  box-shadow: var(--main-button-shadow);
+  font-weight: bold;
+}
+
+/*анимация для кнопок при наведении*/
+.App .filter button:hover {
+  transform: scale(1.05);
+  color: var(--main-color-white);
+  background-color: var(--main-color-purple);
+}
+
+/*расположение элементов по grid сетке*/
+.App .filter .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/*расположение элементов в одной ячейке сетки*/
+.App .filter .filter-grid > div {
+    display: flex;
+    flex-direction: column;
+}
+
+/*стили для названий разделов фильтра*/
+.App .filter .filter-grid label {
+    margin-bottom: 5px;
 }
 /*end*/

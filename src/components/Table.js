@@ -1,5 +1,6 @@
 import TableHead from './TableHead.js';
 import TableBody from './TableBody.js';
+import Filter from './Filter.js';
 import { useState } from 'react';
 
 /*
@@ -11,6 +12,13 @@ import { useState } from 'react';
 */
 
 const Table = (props) => {
+
+    // для фильтрации
+    const [dataTable, setDataTable] = useState(props.data);
+    const updateDataTable = (value) => {
+        setDataTable(value);
+        setCurrentPage(1);
+    };
 
 	// хук для отображения текущей страницы
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +35,7 @@ const Table = (props) => {
     const amountRows = showPagination ? props.amountRows : props.data.length;
 
 	//количество страниц разбиения таблицы
-    const n = Math.ceil(props.data.length / amountRows); 
+    const n = Math.ceil(dataTable.length / amountRows);
     
     // массив с номерами страниц
     const arr = Array.from({ length: n }, (v, i) => i + 1);
@@ -45,16 +53,22 @@ const Table = (props) => {
 
     return( 
       <>
+        <Filter 
+            filtering={ updateDataTable } 
+            data={ dataTable } 
+            fullData={ props.data }
+        />
+
         <table>
             <TableHead head={ Object.keys(props.data[0]) } />
             <TableBody 
-                body={ props.data } 
+                body={ dataTable } 
                 amountRows={ amountRows } 
                 numPage={showPagination ? currentPage : 1}
             />
         </table>
 
-	    {showPagination && (
+	    {showPagination && dataTable.length > 0 && (
                 <div className="numPages">
                     {pages}
                 </div>
