@@ -271,3 +271,130 @@
     margin-bottom: 5px;
 }
 /*end*/
+
+/*стили для визуализации*/
+/*start*/
+.App .visualization {
+  width: fit-content;
+  text-align: center;
+  border-radius: 16px;
+  margin: 15px auto;
+  padding: 10px;
+  border: var(--main-fieldset-border);
+  font-family: var(--main-font-family);
+  transition: var(--main-transition);
+  flex: 1;
+  max-width: 1000px;
+}
+
+/*анимация при наведении на блок визуализации*/
+.App .visualization:hover {
+  transform: scale(1.02);
+  border: 1px solid var(--main-color-purple);
+}
+
+/*стили для легенды визуализации*/
+.App .visualization legend {
+  text-align: center;
+  color: var(--main-text-color);
+  font-family: var(--main-font-family);
+  font-size: large;
+  padding: 0 10px;
+}
+
+/*cтили для формы визуализации*/
+.App .visualization form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/*cтили для групп элементов в форме*/
+.App .visualization .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+  padding: 5px;
+}
+
+/*стили для радио и чекбоксов*/
+.App .visualization input[type="radio"],
+.App .visualization input[type="checkbox"] {
+  
+  margin-right: 8px;
+}
+
+/*стили для select*/
+.App .visualization select {
+  padding: 8px;
+  border-radius: 4px;
+  font-family: var(--main-font-family);
+  border: var(--main-input-border);
+  transition: var(--main-transition);
+  width: fit-content;
+  max-width: 300px;
+
+}
+
+/*анимация для select при фокусе*/
+.App .visualization select:focus {
+  box-shadow: var(--main-input-shadow);
+  background-color: var(--main-color-white);
+  outline: none;
+}
+
+/*анимация для select при наведении*/
+.App .visualization select:hover {
+  transform: scale(1.05);
+  color: var(--main-color-white);
+  background-color: var(--main-color-purple);
+}
+
+/*стили для кнопки построения*/
+.App .visualization button[type="submit"],
+.App .visualization button[type="button"] {
+  font-family: var(--main-font-family);
+  border-radius: var(--main-border-radius);
+  border: var(--main-button-border);
+  padding: 8px 16px;
+  margin: 5px;
+  background-color: transparent;
+  transition: var(--main-transition);
+  width: fit-content;
+}
+
+/*анимация для кнопки при нажатии*/
+.App .visualization button[type="submit"]:active,
+.App .visualization button[type="button"]:active{
+  box-shadow: var(--main-input-shadow);
+  background-color: var(--main-color-white);
+  outline: none;
+  font-weight: bold;
+}
+
+/*анимация для кнопки при наведении*/
+.App .visualization button[type="submit"]:hover,
+.App .visualization button[type="button"]:hover {
+  transform: scale(1.05);
+  color: var(--main-color-white);
+  background-color: var(--main-color-purple);
+}
+
+/*стиль для ошибки*/
+.App .visualization-error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/*стиль для SVG*/
+.App .visualization svg {
+  width: 100%;
+  height: 530px;
+  margin-top: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 8px;
+}
+/*end*/

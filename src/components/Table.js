@@ -17,6 +17,7 @@ const Table = (props) => {
     const [dataTable, setDataTable] = useState(props.data);
     const updateDataTable = (value) => {
         setDataTable(value);
+        props.onFilter(value);
         setCurrentPage(1);
     };
 
