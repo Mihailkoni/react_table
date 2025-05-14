@@ -20,10 +20,10 @@ const Filter = (props) => {
         const formData = new FormData(event.target);
 		// создаем словарь со значениями полей формы
 		const filterField = {
-			"Название": formData.get("structure").toLowerCase(),
-            "Тип": formData.get("type").toLowerCase(),
-            "Страна": formData.get("country").toLowerCase(),
-            "Город": formData.get("city").toLowerCase(),
+			"Название": formData.get("structure").toLowerCase().trim(),
+            "Тип": formData.get("type").toLowerCase().trim(),
+            "Страна": formData.get("country").toLowerCase().trim(),
+            "Город": formData.get("city").toLowerCase().trim(),
             "Год": [minYear ? parseInt(minYear) : -Infinity, maxYear ? parseInt(maxYear) : Infinity],
             "Высота": [minHeight ? parseInt(minHeight) : -Infinity, maxHeight ? parseInt(maxHeight) : Infinity]
         };
