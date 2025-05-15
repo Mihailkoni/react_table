@@ -3,28 +3,37 @@ import { useState } from "react";
 import ChartDraw from "./ChartDraw";
 
 const Chart = (props) => {
-  const [ox, setOx] = useState("Страна");
-  const [oy, setOy] = useState([true, false]);
-  const [chartType, setChartType] = useState("scatter");
-  const [data, setData] = useState([]);
-  const [error, setError] = useState("");
 
+  //состояния
+  const [ox, setOx] = useState("Страна"); // ось x
+  const [oy, setOy] = useState([true, false]); // ось y
+  const [chartType, setChartType] = useState("scatter"); // тип графика
+  const [data, setData] = useState([]); // данные для графика
+  const [error, setError] = useState(""); // ошибка
+
+  // обработка формы
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // значения x
     const selectedOx = event.target["ox"].value;
+
+    // значения y
     const selectedOy = [
       event.target["oy-max"].checked,
       event.target["oy-min"].checked,
     ];
 
+    // тип диаграммы
     const selectedChartType = event.target["chartType"].value;
 
+    // проверка выбора oy
     if (!selectedOy[0] && !selectedOy[1]) {
       setError("Выберите хотя бы одну метрику по оси OY.");
       return;
     }
 
+    // установка значений
     setError("");
     setOx(selectedOx);
     setOy(selectedOy);
@@ -32,21 +41,27 @@ const Chart = (props) => {
     setData(createArrGraph(props.data, selectedOx));
   };
 
+  // очистка
   const handleClear = () => {
     setData([]);
     setError("");
   };
 
+
   const createArrGraph = (data, key) => {
+
+    // группируем данные по выбранному ключу
     const groupObj = d3.group(data, (d) => d[key]);
     let arrGraph = [];
 
+    // вычисляем для каждой группы max и min высоту
     for (let [groupName, groupItems] of groupObj) {
       let max = d3.max(groupItems, (d) => d["Высота"]);
       let min = d3.min(groupItems, (d) => d["Высота"]);
       arrGraph.push({ labelX: groupName, values: [max, min] });
     }
 
+    // сортировка
     if (key === "Год") {
       arrGraph.sort((a, b) => +a.labelX - +b.labelX);
     } else {

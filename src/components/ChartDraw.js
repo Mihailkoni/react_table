@@ -1,30 +1,37 @@
 import * as d3 from "d3";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react"; // хуки
 
 const ChartDraw = ({ data, oy, chartType }) => {
-  const chartRef = useRef(null);
-  const [width, setWidth] = useState(800);
-  const [height, setHeight] = useState(400);
+  // Получает props:
+  // - data: массив данных для отображения
+  // - oy: массив из двух boolean, какие метрики отображать (max/min)
+  // - chartType: тип графика ('scatter' или 'bar')
 
+  const chartRef = useRef(null);
+  const [width, setWidth] = useState(800); // ширина
+  const [height, setHeight] = useState(400); // высота
+
+  // получаем фактические размеры
   useEffect(() => {
     const svg = d3.select(chartRef.current);
-    setWidth(parseFloat(svg.style("width")) || 800);
-    setHeight(parseFloat(svg.style("height")) || 400);
+    setWidth(parseFloat(svg.style("width")) || 800); // реальная ширина
+    setHeight(parseFloat(svg.style("height")) || 400); // реальная высота
   }, []);
 
-  const margin = { top: 10, bottom: 60, left: 40, right: 100 };
-  const boundsWidth = width - margin.left - margin.right;
-  const boundsHeight = height - margin.top - margin.bottom;
+  const margin = { top: 10, bottom: 90, left: 40, right: 120 }; // отступы
+  const boundsWidth = width - margin.left - margin.right; // ширина
+  const boundsHeight = height - margin.top - margin.bottom; // высота
 
   const allYValues = data.flatMap((d) => {
     const values = [];
-    if (oy[0]) values.push(d.values[0]);
-    if (oy[1]) values.push(d.values[1]);
+    if (oy[0]) values.push(d.values[0]); // max высота
+    if (oy[1]) values.push(d.values[1]); // min высота
     return values;
   });
 
-  const [min, max] = d3.extent(allYValues);
+  const [min, max] = d3.extent(allYValues); // min/max среди всех значений
 
+  // формируем шкалы для осей
   const scaleX = useMemo(() => {
     return d3
       .scaleBand()
@@ -44,7 +51,7 @@ const ChartDraw = ({ data, oy, chartType }) => {
     const svg = d3.select(chartRef.current);
     svg.selectAll("*").remove();
 
-    // Оси
+    // рисуем оси
     const xAxis = d3.axisBottom(scaleX);
     svg
       .append("g")
@@ -62,10 +69,11 @@ const ChartDraw = ({ data, oy, chartType }) => {
       .attr("transform", `translate(${margin.left}, ${margin.top})`)
       .call(yAxis);
 
-    // Легенда
+    // легенда
     const legend = svg.append("g")
       .attr("transform", `translate(${width - margin.right + 20}, ${margin.top + 20})`);
 
+    // если отображаем максимумы
     if (oy[0]) {
       legend.append("rect")
         .attr("width", 18)
@@ -91,7 +99,7 @@ const ChartDraw = ({ data, oy, chartType }) => {
         .text("Мин. высота");
     }
 
-    // Данные
+    // точечная диаграмма
     if (chartType === "scatter") {
       data.forEach((d) => {
         const x = scaleX(d.labelX) + scaleX.bandwidth() / 2;
@@ -114,7 +122,7 @@ const ChartDraw = ({ data, oy, chartType }) => {
             .style("fill", "blue");
         }
       });
-    } else if (chartType === "bar") {
+    } else if (chartType === "bar") { // гистограмма
       data.forEach((d) => {
         const x = scaleX(d.labelX);
         const barWidth = scaleX.bandwidth() / (oy[0] && oy[1] ? 2 : 1);
